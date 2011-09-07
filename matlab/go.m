@@ -46,6 +46,8 @@ switch str
         cd(fullfile(workingpath, 'work', 'database'));
     case 'datam'
         cd C:\Users\lbl1985\Documents\MATLAB\work\datamining;
+    case 'dense'
+        cd (fullfile(workingpath, 'work', 'dense'));
     case 'desktop'
         cd C:\Users\lbl1985\Desktop;
     case 'downloads'

@@ -7,5 +7,7 @@ every project git repo. It will be push or pull sepratedly.
     hankel related functions, such as, hankelConstruction, etc.
 - numeric
     numeric / Array format related functions, such as, structField2Vector
+- video
+    video loading/saving etc operation related functions, such as, movie2var
 - visual
     visualization realted functions, such as, varycolor
