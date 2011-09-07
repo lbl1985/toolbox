@@ -2,4 +2,10 @@ Binlong Li's Toolbox, as a stand alone repo in git, should be excluded in
 every project git repo. It will be push or pull sepratedly.
 
 - matlab 
-    contains all system widely supporting functions, such as, git, rmt, vcm
+    all system widely supporting functions, such as, git, rmt, vcm
+- hankel
+    hankel related functions, such as, hankelConstruction, etc.
+- numeric
+    numeric / Array format related functions, such as, structField2Vector
+- visual
+    visualization realted functions, such as, varycolor
