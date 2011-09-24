@@ -1,18 +1,24 @@
-function dividedH_Ht(A, hankelWindowSize)
+function symMatrix = dividedH_Ht(A, hankelWindowSize)
 n = size(A, 1);
 m = hankelWindowSize;
-[rowId1 rowId2] = generateRowId(n, m);
+[rowId1 rowId2 w] = generateRowId(n, m);
 B = A(rowId1, :) .* A(rowId2, :);
-
+symMatrix = w * B;
 
 
 
 end
 
-function [row1 row2] = generateRowId(n, m)
-flagIndex = n/2;
+function [row1 row2 w] = generateRowId(n, m)
+p = n/2 - m + 1;
 row1 = (1:n)';
 row2 = (1:n)';
+if m == p
+    w = spdiagsCat(spdiags(ones(p, m), (0:p-1), m, n/2), spdiags(ones(p, m), (0:p-1), m, n/2));
+else
+    w = [];
+end
+    
 rowStart = [1 2];
 endStart = [1 n - m + 1];
 dis = 1;
@@ -22,12 +28,19 @@ while ~isequal(rowStart, endStart)
     tmpRow2 = (rowStart(2) : rowStart(2) + indLen - 1)';
     row1 = cat(1, row1, tmpRow1);
     row2 = cat(1, row2, tmpRow2);
+    if indLen == m
+        tmpW = ones(1, p);
+    else
+        tmpW = getTmpW(indLen, m, p);     
+    end
+    w = spdiagsCat(w, tmpW);
     rowStart = newStart;
 end
 tmpRow1 = (rowStart(1) : rowStart(1) + m - 1)';
 tmpRow2 = (rowStart(2) : rowStart(2) + m - 1)';
 row1 = cat(1, row1, tmpRow1);
 row2 = cat(1, row2, tmpRow2);
+w = spdiagsCat(w, ones(1, p));
 end
 
 function [indLen newStart dis] = getIndexLength(n, m, rowStart, dis)
@@ -77,5 +90,13 @@ function newStart = getNewStart2(dis, m, newStart, flagIndex)
         newStart(2) = newStart(1) + dis;
     else
         newStart(2) = flagIndex + 1 + ( dis - m);
+    end
+end
+
+function tmpW = getTmpW(indLen, m, p)
+    numRep = indLen - m + 1;
+    tmpW = zeros(numRep, p + numRep - 1);
+    for i = 1 : numRep
+        tmpW(i, i : p + i -1) = ones(1, p);
     end
 end

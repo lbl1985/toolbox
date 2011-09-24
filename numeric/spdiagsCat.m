@@ -1,0 +1,3 @@
+function out = spdiagsCat(topleft, bottomright)
+out = [sparse(topleft) sparse(size(topleft, 1), size(bottomright, 2)); ...
+    sparse(size(bottomright, 1), size(topleft, 2)) sparse(bottomright)];
