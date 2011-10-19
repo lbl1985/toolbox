@@ -2,7 +2,8 @@ function symMatrix = dividedH_Ht(A, hankelWindowSize)
 n = size(A, 1);
 m = hankelWindowSize;
 [rowId1 rowId2 w] = generateRowId(n, m);
-B = A(rowId1, :) .* A(rowId2, :);
+B = bsxfun(@times, A(rowId1, :), A(rowId2, :));
+% B = A(rowId1, :) .* A(rowId2, :);
 symMatrix = w * B;
 
 
