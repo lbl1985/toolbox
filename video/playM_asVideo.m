@@ -1,4 +1,4 @@
-function playM_asVideo(M, fbeg, fend, pause_time, clrmap)
+function playM_asVideo(M, fbeg, fend, pause_time, clrmap, visType)
 % [3D & 4D] Used to play a stack of T images as a video. If the M is 2D
 % image, the same as imagesc(M)
 %
@@ -10,6 +10,8 @@ function playM_asVideo(M, fbeg, fend, pause_time, clrmap)
 %   fend        - [optional] Endding frame(if empty then = end frame)
 %   pause_time	- [optional] if empty = 22
 %   clrmap      - [optional] if empty = 'jet'
+%   visType     - [optional] if empty = 'imshow'. 
+%                   Others: 'imshow'/'imagesc'/'mesh'/'images_colorbar'
 %
 % OUTPUTS
 %
@@ -34,6 +36,7 @@ if (nargin < 2 || isempty(fbeg)),       fbeg = 1;           end
 if (nargin < 3 || isempty(fend)),       fend = 0;           end
 if (nargin < 4 || isempty(pause_time)), pause_time = 22;    end
 if (nargin < 5 || isempty(clrmap)),     clrmap = 'jet';     end
+if (nargin < 6 || isempty(visType)),    visType = 'imshow';  end
 if fend == 0,       fend = size(M, nd); end 
 
 filename = inputname(1);
@@ -43,17 +46,31 @@ if (nd == 2)
     title(sprintf('%s', filename));
 elseif (nd == 3)
     if ~iscell(M)
-        for i = fbeg : fend
-    %       imagesc(M(:, :, i - fbeg + 1)); colormap(clrmap);
-%             imagesc(M(:, :, i)); colormap(clrmap); colorbar;
-            imshow(M(:, :, i)); 
+        screen = get(0, 'ScreenSize');  screen = screen(3) * screen(4) / 6;
+        siz = size(M(:, :, 1));     area = siz(1) * siz(2);
+        multiplier = floor(sqrt(screen / area)); 
+        if multiplier < 1,  multiplier = 1;     end
+        
+        for i = fbeg : fend    
+            switch visType
+                case 'imshow'
+                    imshow(imresize(M(:, :, i), multiplier)); 
+                case 'imagesc'
+                    imagesc(imresize(M(:, :, i), multiplier)); colormap(clrmap); 
+                case 'mesh'
+                    [X Y] = meshgrid((siz(1) : -1 : 1), (siz(2) : -1 : 1));
+                    mesh(X, Y, double(M(:, :, i)));
+                    axis([1 siz(1) 1 siz(2) 0 255]);
+                case 'imagesc_colorbar'
+                    imagesc(imresize(M(:, :, i), multiplier)); colormap(clrmap); colorbar;
+            end             
             title(sprintf('%s\nFrame%d', filename,  i));
             pause(1/pause_time);        
         end
     else
         for i = fbeg : fend
             for j = 1 : n
-                subplot(1, n, i); 
+                subplot(1, n, i);                 
                 imagesc(M{j}(:, :, i)); colormap(clrmap); colorbar;
 %                 imshow(M{j}(:, :, i));
                 title(sprintf('%s\nFrame%d', filename,  i));
