@@ -1,6 +1,9 @@
 %quick wrapper for min Euclidean distance for kmeans labeling
 
 function vword = findvword(vocab, X)
+% Input: 
+% vocad:    n x d
+% X:        n x d
 %   tic
    center = vocab';
    X = X';
