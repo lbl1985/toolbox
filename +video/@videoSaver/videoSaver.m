@@ -1,7 +1,15 @@
 classdef videoSaver < handle
     %SAVEVIDEO Summary of this class goes here
     %   Detailed explanation goes here
-    
+    % Example: 
+    % destFolder = fullfile(getProjectBaseFolder, 'Results', 'sync');
+    %  saveVideo = video.videoSaver(fullfile(destFolder, 'trial1.avi'), 29);
+    %  h = figure(1);
+    %  saveVideo.fig = h;
+    %  In the Loop: 
+    %  saveVideo.saveCore;
+    %  Finish
+    %  saveVideo.saveClose;
     properties
         movieFile
         M
