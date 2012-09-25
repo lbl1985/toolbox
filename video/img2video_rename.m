@@ -25,4 +25,12 @@ switch phrase
             comm = ['!mv ' sourceFile ' ' targetFile];
             eval(comm);
         end
+    case 'num2'
+        for j = 1 : n
+            sourceFile = fullfile(sourceFolder, filenames{j});
+            targetFile = fullfile(sourceFolder, ['img' num2str2(j, ndigital) '.jpg']);
+            comm = ['!mv ' sourceFile ' ' targetFile];
+            eval(comm);
+        end
+        
 end
