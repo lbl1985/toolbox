@@ -12,6 +12,6 @@ function drawTraj(traj)
 % line(a(:, 1), a(:, 2)); plot(a(end, 1), a(end, 2), 'r*');
 % hold off; 
 % figure(fig); hold on; 
-line(traj(:, 1), traj(:, 2)); plot(traj(end, 1), traj(end, 2), 'r*');
+line(traj(:, 1), traj(:, 2)); plot(traj(end, 1), traj(end, 2), 'r*', 'MarkerSize', 10);
 % line(traj(:, 2), traj(:, 1)); plot(traj(end, 2), traj(end, 1), 'r*');
 % hold off;

@@ -12,3 +12,4 @@ if size(p0) ~= size(p1)
 end
 
 dis = sqrt(sum((p0 - p1).^2, 2));
+
