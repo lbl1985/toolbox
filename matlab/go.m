@@ -84,6 +84,8 @@ switch str
         cd C:\Users\lbl1985\Documents\MATLAB\work\BR\cuboids\stfeatures;
     case 'tadmor'
         cd (fullfile(workingpath, 'Tadmor'));
+    case 'toolbox'
+        cd (fullfile(workingpath, 'toolbox'));
     case 'tv'
         cd (fullfile(workingpath, 'work', 'interaction', 'tvinteration'));
     case 'work'
