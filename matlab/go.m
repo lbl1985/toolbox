@@ -58,6 +58,8 @@ switch str
         cd ('C:\Users\lbl1985\Documents\MATLAB\work\GUI');
     case 'hfeature'
         cd (fullfile(workingpath, 'work', 'HFeature'));
+    case 'hrf'
+        cd (fullfile(workingpath, '..', '..', 'Develop', 'HRF', 'MATLAB_Files'));
     case 'ind'
         cd ('C:\Users\lbl1985\Documents\MATLAB\work\CV\IndPro');
     case 'irani'
