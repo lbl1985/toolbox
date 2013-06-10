@@ -1,7 +1,7 @@
 function [status, result] = git(varargin)
 
 if ispc
-    cmd = '"c:\Program Files (x86)\Git\cmd\git.cmd"';
+    cmd = '"c:\Program Files (x86)\Git\bin\git.exe"';
 end
 if ismac
     cmd = '"/usr/local/git/bin/git"';
